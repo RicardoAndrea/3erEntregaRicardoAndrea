@@ -1,13 +1,35 @@
+import { comprarProducto } from "./carrito.js"
 
-
-
+const userlogin = document.getElementById("userlogin")
 const divProductos = document.getElementById("productos")
 
-export let productosDisponibles = json.parse(localStorage.getItem("productos"))
+export let productosDisponibles = JSON.parse(localStorage.getItem("productos"))
+let usuarioLogeado = JSON.parse(sessionStorage.getItem("usuario"))
 
 document.addEventListener("DOMContentLoaded", () => {
-    generarCardsProductos(productosDisponibles)
-})
+     if(usuarioLogeado === null){
+      const a = document.createElement("a")
+      a.href = "./html/usuarios.html"
+      a.innerHTML = "Login"
+      userLogin.appendChild(a)
+    }else{
+      const p = document.createElement("p")
+      const close = document.createElement("button")
+  
+      p.innerHTML = `Bienvenido ${usuarioLogeado.user}`
+      close.id = "cerrar__sesion"
+      close.innerHTML = "cerrar sesion"
+      close.addEventListener("click", () => {
+        alert(`Gracias por comprar en nuestra tienda ${usuarioLogeado.user}. Usuario deslogeado`)
+  
+        sessionStorage.removeItem("usuario")
+        location.reload()
+      })
+      userLogin.appendChild(p)
+      userLogin.appendChild(close)
+    }
+      generarCardsProductos(productosDisponibles)
+  })
 
 export const generarCardsProductos = (productos) => {
     divProductos.innerHTML = "";
@@ -28,5 +50,8 @@ export const generarCardsProductos = (productos) => {
         </div>`;
   
       divProductos.appendChild(card);
+
+      const btnComprar = document.getElementById(`btn${id}`)
+      btnComprar.addEventListener("click", () => comprarProducto(id))
     });
 };

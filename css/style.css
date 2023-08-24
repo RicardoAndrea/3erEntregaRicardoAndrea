@@ -1,7 +1,6 @@
 *{margin: 0;
     padding: 0;
-  
-  }
+    }
   body {
           font-family: 'Lato',sans-serif;
         
@@ -10,6 +9,16 @@
     width: 100%;
     padding: 10px 0px;
     background: gray;
-    
-    
+    padding-top: 10px;
+    margin-bottom: 0%;
+}
+#carrito{
+  display: none;
+  position: fixed;
+  top: 10%;
+  right: 10%;
+  width: 30%;
+  height: auto;
+  background-color: whitesmoke;
+  z-index: 1001;
 }
